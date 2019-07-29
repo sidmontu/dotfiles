@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/sidmontu/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -85,59 +85,72 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# check what OS we're on
+isMac=`uname -a | grep "Darwin" | wc -l | sed "s/\s//g"`
+
 # open
-alias open=gnome-open
+if [[ $isMac -eq 0 ]]
+then
+    alias open=gnome-open
+fi
 
 # Sublime Text
-export PATH=$PATH:/opt/sublime_text
+if [ -d "/opt/sublime_text" ]
+then
+    export PATH=$PATH:/opt/sublime_text
+fi
 
-# Xilinx
-# export PATH=${PATH}:/opt/Xilinx/SDK/2015.4/bin
-# export PATH=${PATH}:/opt/Xilinx/Vivado/2015.4/bin
-# export PATH=${PATH}:/opt/Xilinx/Vivado_HLS/2015.4/bin
-# source /opt/Xilinx/Vivado/2015.4/settings64.sh
+# Xilinx Vivado Tools
+VIVADO_VER=2018.3
+if [ -d "/opt/Xilinx/Vivado/${VIVADO_VER}/" ]
+then
+    export PATH=$PATH:/opt/Xilinx/SDK/${VIVADO_VER}/bin
+    export PATH=$PATH:/opt/Xilinx/Vivado/${VIVADO_VER}/bin
+    source /opt/Xilinx/Vivado/${VIVADO_VER}/settings64.sh
+fi
 
-export PATH=$PATH:/opt/Xilinx/SDK/2018.3/bin
-export PATH=$PATH:/opt/Xilinx/Vivado/2018.3/bin
-source /opt/Xilinx/Vivado/2018.3/settings64.sh
+# Altera Quartus Tools
+QUARTUS_VER=18.0
+if [ -d "`pwd`/intelFPGA_pro/${QUARTUS_VER}" ]
+then
+    export PATH=$PATH:/home/sidmontu/intelFPGA_pro/${QUARTUS_VER}/quartus/bin
+fi
 
-# export PATH=$PATH:/opt/Xilinx/SDK/2018.3/bin
-# export PATH=$PATH:/opt/Xilinx/Vivado/2018.3/bin
-# source /opt/Xilinx/Vivado/2018.3/settings64.sh
-
-# export PATH=$PATH:/opt/Xilinx/SDK/2017.4/bin
-# export PATH=$PATH:/opt/Xilinx/Vivado/2017.4/bin
-# source /opt/Xilinx/Vivado/2017.4/settings64.sh
-
-# Altera
-export PATH=$PATH:/home/sidmontu/intelFPGA_pro/18.0/quartus/bin
+# FPGA tools license files
+export LM_LICENSE_FILE=2100@tuna.staff.sydney.edu.au:2200@tuna.staff.sydney.edu.au
+export XILINXD_LICENSE_FILE=2100@tuna.staff.sydney.edu.au
+export ALTERAD_LICENSE_FILE=2200@tuna.staff.sydney.edu.au
 
 # PaToH
-export PATH=$PATH:/opt/patoh
+if [ -d "/opt/patoh" ]
+then
+    export PATH=$PATH:/opt/patoh
+fi
 
 # Virtualenv Python working dir
-export WORKON_HOME=~/Envs # needed for virtualenvwrapper
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]
+then
+    export WORKON_HOME=~/Envs # needed for virtualenvwrapper
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
-# license files
-export LM_LICENSE_FILE=2100@10.65.196.228:2200@10.65.196.228
-export XILINXD_LICENSE_FILE=2100@10.65.196.228:/opt/Xilinx/13.4/license/Xilinx.lic
-export ALTERAD_LICENSE_FILE=2200@10.65.196.228
-
-# rust
-source ~/.cargo/env
+# Rust
+if [ -d "~/.cargo" ]
+then
+    source ~/.cargo/env
+fi
 
 setopt promptsubst
 PS1=$'${(r:$COLUMNS::_:)}'$PS1
 
-# better dirs
+# Better dirs
 alias dirs="dirs -v"
 
-# locales
-# export LC_ALL=C; unset LANGUAGE
-
-# gnuradio/rfnoc
-source ~/rfnoc/setup_env.sh
+# Gnuradio/rfnoc
+if [ -d "~/rfnoc" ]
+then
+    source ~/rfnoc/setup_env.sh
+fi
 
 # .cfg dotfiles alias
-alias config='/usr/bin/git --git-dir=/home/sidmontu/.cfg/ --work-tree=/home/sidmontu'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
