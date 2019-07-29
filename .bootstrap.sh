@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config checkout
+
 # install oh-my-zsh if its not installed
 if [ -d "$HOME/.oh-my-zsh" ]
 then
