@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/sidmontu/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin'
+let g:netrw_dirhist_2='/home/sidmontu/workspace/HLSDesigns/scripts'
+let g:netrw_dirhist_3='/home/sidmontu/workspace/autoencoder/hw/hls/fpga_train/autoenc_prj'
+let g:netrw_dirhist_4='/opt'
+let g:netrw_dirhist_5='/opt/google'
+let g:netrw_dirhist_6='/home/sidmontu/Xilinx_Projects/zcu111_rx_fft/hls/imager/imager_prj'
+let g:netrw_dirhist_7='/home/sidmontu/area51/SDFEC-PYNQ/boards/ZCU111/.Xil'
