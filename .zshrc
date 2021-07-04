@@ -94,63 +94,16 @@ then
     alias open=gnome-open
 fi
 
-# Sublime Text
-if [ -d "/opt/sublime_text" ]
-then
-    export PATH=$PATH:/opt/sublime_text
-fi
-
-# Xilinx Vivado Tools
-VIVADO_VER=2018.3
-if [ -d "/opt/Xilinx/Vivado/${VIVADO_VER}/" ]
-then
-    export PATH=$PATH:/opt/Xilinx/SDK/${VIVADO_VER}/bin
-    export PATH=$PATH:/opt/Xilinx/Vivado/${VIVADO_VER}/bin
-    source /opt/Xilinx/Vivado/${VIVADO_VER}/settings64.sh
-fi
-
-# Altera Quartus Tools
-QUARTUS_VER=18.0
-if [ -d "`pwd`/intelFPGA_pro/${QUARTUS_VER}" ]
-then
-    export PATH=$PATH:/home/sidmontu/intelFPGA_pro/${QUARTUS_VER}/quartus/bin
-fi
-
 # FPGA tools license files
-export LM_LICENSE_FILE=2100@tuna.staff.sydney.edu.au:2200@tuna.staff.sydney.edu.au
-export XILINXD_LICENSE_FILE=2100@tuna.staff.sydney.edu.au
-export ALTERAD_LICENSE_FILE=2200@tuna.staff.sydney.edu.au
-
-# PaToH
-if [ -d "/opt/patoh" ]
-then
-    export PATH=$PATH:/opt/patoh
-fi
-
-# Virtualenv Python working dir
-if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]
-then
-    export WORKON_HOME=~/Envs # needed for virtualenvwrapper
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-# Rust
-if [ -d "~/.cargo" ]
-then
-    source ~/.cargo/env
-fi
+export LM_LICENSE_FILE=<PORT@HOSTNAME>:<PORT@HOSTNAME>
+export XILINXD_LICENSE_FILE=<PORT@HOSTNAME>
+export ALTERAD_LICENSE_FILE=<PORT@HOSTNAME>
 
 setopt promptsubst
 PS1=$'${(r:$COLUMNS::_:)}'$PS1
 
 # Better dirs
 alias dirs="dirs -v"
-
-# Gnuradio/rfnoc
-if [ -d "~/rfnoc" ]
-then
-    source ~/rfnoc/setup_env.sh
-fi
 
 # .cfg dotfiles alias
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
